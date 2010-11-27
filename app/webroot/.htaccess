@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    RewriteCond %{REQUEST_URI} (.*\.)(jpg|bmp|gif|png)$ [NC]
+    RewriteRule ^(.*\.)(jpg|bmp|gif|png)$ images.php?file=$1$2 [QSA,NC,S,L]
+
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_URI} !images.php(.*) [NC]
+   RewriteRule ^(.*)$ index.php?url=$1 [QSA]
+
+</IfModule>

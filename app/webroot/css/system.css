@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+	}
+	
+body {
+	background-color:#f8f8f8;
+}
+
+#header {
+	background-color: #353535;
+	padding: 2px;
+	text-align:center;
+}
+
+#header a  {
+	color: white;
+	text-decoration: none;
+
+}
+
+#content {
+	padding: 0 25px;
+}
+
+	#content ul { 
+		margin: 5px 0 15px 0;
+	}
+	
+	#content ul li i {
+		font-size: 80%;
+	}
+	

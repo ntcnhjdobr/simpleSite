@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/!svn/ver/41/trunk/sources/PhpResizer/Engine
+END
+GraphicsMagick.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/41/trunk/sources/PhpResizer/Engine/GraphicsMagick.php
+END
+ImageMagic.php
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/41/trunk/sources/PhpResizer/Engine/ImageMagic.php
+END
+EngineAbstract.php
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/41/trunk/sources/PhpResizer/Engine/EngineAbstract.php
+END
+GD2.php
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/41/trunk/sources/PhpResizer/Engine/GD2.php
+END
