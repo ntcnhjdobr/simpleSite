@@ -71,13 +71,21 @@ class Debugger {
 		return $output;
 		
 	}
-	
+
+	/**
+	 * Start test memory for key
+	 * @param string $key
+	 */
 	public function memoryStart ($key) {
     	if ($this->isDisabled()){return;}
         $memory = memory_get_usage();
         $this->debug['memory'][$key]=$memory;
     }
     
+    /**
+	 * End test memory for key
+	 * @param string $key
+	 */
  	public function memoryEnd ($key) {
     	$this->isDisabled();
         if (!isset($this->debug['memory'][$key]))  {
@@ -103,13 +111,20 @@ class Debugger {
 	
 	
 			
-// Timer 
+ 	/**
+	 * Start test Time for key
+	 * @param string $key
+	 */
     public function timerStart ($key) {
     	if ($this->isDisabled()){return;}
         $time = $this->getCurrTime();
         $this->debug['timer'][$key]=$time;
     }
 
+     /**
+	 * End test Time for key
+	 * @param string $key
+	 */
     public function timerEnd ($key) {
     	$this->isDisabled();
         if (!isset($this->debug['timer'][$key]))  {
