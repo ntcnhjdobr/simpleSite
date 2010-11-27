@@ -37,6 +37,11 @@ class Debugger {
 		$this->debug[]=	$info;
 	}
 	
+	/**
+	 * 
+	 * render DebugInfo
+	 * @return string
+	 */
 	public function render() {
 		if ($this->isDisabled()){return;}
 		$this->isDisabled = true;
