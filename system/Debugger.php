@@ -19,7 +19,12 @@ class Debugger {
 		$this->memoryStart(self::START_APP);
 	}
 	
-
+	/**
+	 * 
+	 * singletone pattern
+	 * @param array
+	 * @return Debugger instance  
+	 */
 	static public function getInstance (array $params=array()) {
 		if(!self::$instance){
 			self::$instance = new self($params);
