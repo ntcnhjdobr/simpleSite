@@ -79,13 +79,13 @@ class View {
 		$instance->_checkFileExist($fileName);
 		
 		ob_start();
-		require_once $fileName;
+		include $fileName;
 		$render = ob_get_clean();
 		return $render;
 	}
 	
 	private function _checkFileExist ($fileName,$message='') {
-		if (!file_exists($fileName)) {
+		if (!is_readable($fileName)) {
 			throw new AbstractException('файл: '.$fileName.' не найден'.$message);
 		}
 	}

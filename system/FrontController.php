@@ -42,25 +42,22 @@ class FrontController {
 		$this->route = array_map('strtolower', $this->route);
 	}
 	
-	private function initController() {
-		
+	private function initController() 
+	{
 		$className =  'Controller_'.ucfirst($this->route['controller'].'');
 		$this->controller=new $className();
-		
 		$this->controller->route=$this->route;
-		
 		$this->controller->init();
 	}
 	
-	private function initView() {
+	private function initView() 
+	{
 		$this->controller->view =new View ();
-		$this->controller->view->setPageTitlePrefix('PHPResizer');
+		$this->controller->view->setPageTitlePrefix('Site');
 		$this->controller->view->setLayout('layout');
 		$this->controller->view->setViewPath($this->route['controller'].'/'.$this->route['action']);
 	}
 
-
-	
 	private function run () {
 		$action = $this->route['action'];
 		
