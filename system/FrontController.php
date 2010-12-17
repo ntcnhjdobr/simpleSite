@@ -53,7 +53,7 @@ class FrontController {
 	private function initView() 
 	{
 		$this->controller->view =new View ();
-		$this->controller->view->setPageTitlePrefix('Site');
+		$this->controller->view->setPageTitlePrefix('Брусничка');
 		$this->controller->view->setLayout('layout');
 		$this->controller->view->setViewPath($this->route['controller'].'/'.$this->route['action']);
 	}

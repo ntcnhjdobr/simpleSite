@@ -41,7 +41,6 @@ class Autoloader {
 		eval("class $class {
             function __construct() {
                 throw new AbstractException('Class $class not found');
-            }
-        }");
+            }}");
 	}
 }

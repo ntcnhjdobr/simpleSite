@@ -13,10 +13,11 @@ class Helper_Html {
 			$link.=$params['action'].'/';
 		}
 
-		if (isset($params['param1'])) {
+		if (isset($params['param1']) && $params['param1']) {
 			$link.=$params['param1'].'/';
 		}
-		if (isset($params['param2'])) {
+		
+		if (isset($params['param2'])&& $params['param2']) {
 			$link.=$params['param2'].'/';
 		}
 				

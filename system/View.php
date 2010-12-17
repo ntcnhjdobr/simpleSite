@@ -2,8 +2,8 @@
 class View {
 	private $layout=false;
 	private $viewPath = false;
-	private $pageTitle = '';
-	
+	private $_pageTitle = '';
+	private $_pageDescription = '';
 	
 	private $data = array();
 	
@@ -38,7 +38,9 @@ class View {
 		ob_start();
 			require_once $this->viewPath;
 		$content = ob_get_clean();
+		
 		$title = $this->_getPageTitlePrefix().' - '.$this->_getPageTitle();
+		$description = $this->_getPageDescrioption();
 		
 		require_once $this->layout;
 	}
@@ -47,12 +49,12 @@ class View {
  * TITLE
  */
 	public function setPageTitle($title='') {
-		$this->pageTitle = $title;
+		$this->_pageTitle = $title;
 	}
 	
 	private function  _getPageTitle(){
-		if ($this->pageTitle) {
-			return $this->pageTitle; 
+		if ($this->_pageTitle) {
+			return $this->_pageTitle; 
 		}else{
 			return 'No title';
 		}
@@ -67,6 +69,17 @@ class View {
 			return '';
 		}
 	}
+/**
+ * Descriotion
+ */
+	
+	public function setPageDescription($description='') {
+		$this->_pageDescription = $description;
+	}
+	public function _getPageDescrioption($description='') {
+		return $this->_pageDescription;
+	}
+	
 ////////////////////////
 
 	

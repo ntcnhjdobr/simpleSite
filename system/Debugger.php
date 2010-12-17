@@ -58,8 +58,9 @@ class Debugger {
 
 		//SQL
 		$output.='<h4>SQL</h4>';
+		
 		foreach ($this->debug['sql'] as $sql) {
-			$output.= ($this->debug['sql']);
+			$output.= ($sql).'<hr/>';
 		}
 
 		//Memory
@@ -72,6 +73,17 @@ class Debugger {
 		
 	}
 
+
+	/**
+	 * Add SQL
+	 * @param string $key
+	 */
+	public function addSql ($sql) {
+    	if ($this->isDisabled()){return;}
+        $this->debug['sql'][]=$sql;
+    }
+    
+    
 	/**
 	 * Start test memory for key
 	 * @param string $key
