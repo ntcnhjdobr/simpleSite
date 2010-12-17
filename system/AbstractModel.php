@@ -50,8 +50,9 @@ class AbstractModel
 			$sql .=' LEFT JOIN '.$join;
 		};
 		
+		$sql .=' WHERE '.$this->_tablename.'.status='.Model_Sample::STATUS_ON;
 		if ($where) {
-			$sql .=' WHERE '.$where;
+			 $sql .=' AND '.$where;
 		};
 
 		if ($orderby) {
