@@ -1,10 +1,10 @@
 <?php
 $config=array();
 
-$config['showErrors']=true;
+$config['showErrors']=false;
 
 $config['debugger']=array(
-	'enabled'=>true
+	'enabled'=>false
 );
 
 $config['googleAnalytics']=array(

@@ -37,7 +37,8 @@ class AbstractModel
 			'join'=>false,
 			'orderby'=>$this->_tablename.'.created DESC',
 			'groupby'=>false,
-			'having'=>false
+			'having'=>false,
+			'onlyStatusOn'=>true
 		);
 		
 		$param = array_merge($defalutParam, $inputParam);
@@ -50,9 +51,20 @@ class AbstractModel
 			$sql .=' LEFT JOIN '.$join;
 		};
 		
-		$sql .=' WHERE '.$this->_tablename.'.status='.Model_Sample::STATUS_ON;
+		if ($onlyStatusOn || $where) {
+			$sql .=' WHERE ';
+		}
+		
+		if ($onlyStatusOn){
+			$sql .=$this->_tablename.'.status='.Model_Sample::STATUS_ON;
+		}
+		
 		if ($where) {
-			 $sql .=' AND '.$where;
+			if ($onlyStatusOn) {
+ 				$sql .=' AND '.$where;
+			}else{
+				$sql .=$where;
+			}
 		};
 
 		if ($orderby) {
@@ -68,7 +80,6 @@ class AbstractModel
 		if ($having) {
 			$sql .=' HAVING '.$having;
 		};
-		
 		
         return $this->_output($sql);
     }
