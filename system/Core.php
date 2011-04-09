@@ -27,7 +27,7 @@ class Core
 	                );
 	                
 		Logger::write('error', $errortype[$errno].': '.$errstr.' in '.$errfile.', on line '.$errline);
-		
+
 		if (Configuration::getInstance()->get('config.showErrors')) {
 			echo '<div style="background-color: white; padding: 10px">';
 			echo '<h1>'.$errortype[$errno].'</h1>';

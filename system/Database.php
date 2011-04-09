@@ -22,7 +22,9 @@ class Database
 				$configDb['pass']
 			);
     	}
-    	self::$_conn->exec('charset utf8');
+    	self::$_conn->exec('CHARSET UTF8');
+    	self::$_conn->exec('SET NAMES UTF8');
+    	
 		return self::$_conn;
 	}
 }

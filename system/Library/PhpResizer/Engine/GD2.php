@@ -47,7 +47,7 @@ class PhpResizer_Engine_GD2 extends PhpResizer_Engine_EngineAbstract
             imagecopyresized ($temp, $image, $dstX, $dstY, $srcX, $srcY, $dstWidth, $dstHeight, $srcWidth, $srcHeight);
         }
 
-        call_user_func("image" . $this->types[$size[2]], $temp, $cacheFile);
+        call_user_func("image" . $this->types[$size[2]], $temp, $cacheFile, 90);
         imagedestroy($image);
         imagedestroy($temp);
         return true;

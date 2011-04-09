@@ -18,7 +18,7 @@ class Controller_Log extends AbstractController {
 		
 		$this->view->set('allFiles',$this->getAllFiles());
 		
-		
+		$filename = str_replace(' ','_',$filename);		
 		if (!$filename OR !file_exists(LOGS_PATH.$filename)) {
 			$content='Файл '.LOGS_PATH.$filename.' не найден';	
 		}else{

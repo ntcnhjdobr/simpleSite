@@ -14,6 +14,7 @@ class FrontController {
 		$this->run();
 	}
 	
+	
 	private function initConfiguration() {
 		$this->config=Configuration::getInstance();
 	}
@@ -23,23 +24,12 @@ class FrontController {
 	}
 	
 	private function parseUrl() {
+				
 		$url=(isset($_GET['url']))?$_GET['url']:'';
+		$router = new Router();
 		
-		$arrayUrl =(explode('/',$url));
-		 
-		if (isset($arrayUrl[0]) AND $arrayUrl[0]) {
-			$this->route['controller']=$arrayUrl[0];
-		}
-		if (isset($arrayUrl[1]) AND $arrayUrl[1]) {
-			$this->route['action']=$arrayUrl[1];
-		}
-		if (isset($arrayUrl[2]) AND $arrayUrl[2]) {
-			$this->route['param1']=$arrayUrl[2];
-		}
-		if (isset($arrayUrl[3]) AND $arrayUrl[3]) {
-			$this->route['param2']=$arrayUrl[3];
-		}
-		$this->route = array_map('strtolower', $this->route);
+		$this->route = $router->getRouteArray($url);
+		
 	}
 	
 	private function initController() 
@@ -52,10 +42,7 @@ class FrontController {
 	
 	private function initView() 
 	{
-		$this->controller->view =new View ();
-		$this->controller->view->setPageTitlePrefix('Брусничка');
-		$this->controller->view->setLayout('layout');
-		$this->controller->view->setViewPath($this->route['controller'].'/'.$this->route['action']);
+
 	}
 
 	private function run () {

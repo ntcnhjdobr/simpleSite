@@ -8,21 +8,43 @@ class AbstractModel
 	protected $_tablename = null;
 	
 	
-	private function _output($sql) {
-		Debugger::getInstance()->addSql($sql);
+	private function _output($sql, $params = array()) 
+	{
+		$unqid = uniqid();
+		Debugger::getInstance()->timerStart($unqid);
 		
 		$conn = Database::getConnection();
-		$query = $conn->query($sql);
-        if (!$query) {
+		
+		if ($params) {
+			$query = $conn->prepare($sql);
+			$query->execute($params);
+			$sqlForDebugger = $sql .'  ('. implode(',', $params).')';
+		}else{
+			$query = $conn->query($sql);
+			$sqlForDebugger = $sql;
+		}
+		
+		if (!$query) {
         	return false;
         }
-        return  $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        $return = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        Debugger::getInstance()->addSql(array(
+        	$sqlForDebugger,
+        	$query->rowCount(),
+        	Debugger::getInstance()->timerEnd($unqid, false))
+        );
+        
+        return $return;
 	}
 	
-	public function query($sql) {
-		$return = $this->_output($sql);
-		if (!$return) {
+	public function query($sql, $params = array())  
+	{
+		$return = $this->_output($sql, $params);
+		if ($return === false) {
 			$conn = Database::getConnection();
+			throw new AbstractException($sql);
 			var_dump($sql);
 			var_dump ($conn->errorInfo());
 		}
@@ -35,10 +57,10 @@ class AbstractModel
 			'where'=>false,
 			'select' => '*',
 			'join'=>false,
-			'orderby'=>$this->_tablename.'.created DESC',
+			'orderby'=>$this->_tablename.'.id DESC',
 			'groupby'=>false,
 			'having'=>false,
-			'onlyStatusOn'=>true
+			'onlyStatusOn'=>true,
 		);
 		
 		$param = array_merge($defalutParam, $inputParam);
@@ -74,20 +96,19 @@ class AbstractModel
 		if ($groupby) {
 			$sql .=' GROUP BY '.$groupby;		
 		}
-		
-		
 
 		if ($having) {
 			$sql .=' HAVING '.$having;
 		};
 		
-        return $this->_output($sql);
+        return $this->query($sql);
     }
+    
     
 	public function getBy($column, $value) 
 	{
-        $sql = "SELECT * from {$this->_tablename} where {$column}='{$value}'";
-        return $this->_output($sql);
+        $sql = "SELECT * from `{$this->_tablename}` where `{$column}`=:value";
+        return $this->query($sql, array('value'=>$value));
 	}
 	
 	/**
@@ -99,10 +120,8 @@ class AbstractModel
 	 */
 	public function deleteBy($column, $value)
 	{
-		$conn = Database::getConnection();
-		$sql = "DELETE from {$this->_tablename} where {$column}='{$value}'";
-		$deleteRows = $conn->exec($sql);
-		return  $deleteRows;
+        $sql = "DELETE FROM `{$this->_tablename}` WHERE `{$column}`=:value";
+        return $this->query($sql, array('value'=>(int)$value));
 	}
 	
 	

@@ -1,0 +1,52 @@
+#waterwheelCarousel {
+    width:850px;
+	margin: 0 auto;
+    height:250px;
+}
+
+#waterwheelCarousel img {
+    display:none;
+    background: url('/app/webroot/img/icons/spinner.gif') no-repeat center center white;
+    cursor:pointer;
+    width: 300px;
+    height: 300px;
+    margin: 1px;
+}
+
+#waterwheelCarousel img:hover {
+	margin: 0;
+	border: 1px solid #777;
+}
+
+#left, #right {
+	margin-top: 105px;
+	width: 60px; height:60px;
+	background: url('/app/webroot/img/icons/arrow.png') no-repeat;
+}
+
+#left{
+	float: right;
+	background-position: 0px -120px;
+}
+#left:hover{
+	background-position: 0px -180px;
+}
+
+
+#right{
+	float: left;
+	background-position: 0px -0px;
+}
+#right:hover{
+	float: left;
+	background-position: 0px -60px;
+}
+
+#sampleInfo {
+	text-align: center; 
+	text-shadow: 0 1px 0 #000, 0 0 5px #000; 
+	color: white; 
+	font-size: 25px; 
+	margin-top: 10px;
+    margin-bottom: 10px
+}

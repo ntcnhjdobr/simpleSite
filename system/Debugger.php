@@ -50,6 +50,7 @@ class Debugger {
 		$this->memoryEnd(self::START_APP);
 
 		$output = '';
+		
 		//Timer
 		$output.='<h4>Timer</h4>';
 		foreach ($this->debug['timer'] as $timer) {
@@ -59,9 +60,11 @@ class Debugger {
 		//SQL
 		$output.='<h4>SQL</h4>';
 		
+		$output.='<table>';
 		foreach ($this->debug['sql'] as $sql) {
-			$output.= ($sql).'<hr/>';
+			$output.=sprintf('<tr><td>%s</td><td>%d</td><td>%.2f</td></tr>', $sql[0], $sql[1], $sql[2]);
 		}
+		$output.='</table>';
 
 		//Memory
 		$output.= '<h4>Memory</h4>';
@@ -70,7 +73,6 @@ class Debugger {
 			$output.=$memory.'<br/>';
 		}
 		return $output;
-		
 	}
 
 
@@ -137,19 +139,27 @@ class Debugger {
 	 * End test Time for key
 	 * @param string $key
 	 */
-    public function timerEnd ($key) {
+    public function timerEnd ($key, $addStack = true) {
     	$this->isDisabled();
+    	
         if (!isset($this->debug['timer'][$key]))  {
             return;
         }
-        
+
         $start = $this->debug['timer'][$key];
         $end = $this->getCurrTime();
 
         $s = $end[1]-$start[1];
         $m = $end[0]-$start[0];
         $return = round(($s + $m)*1000,3);
-        $this->debug['timer'][$key]=$key.': '.$return.' ms';
+        
+        if ($addStack) {
+        	$this->debug['timer'][$key] = $key.': '.$return.' ms';
+        }else{
+        	unset($this->debug['timer'][$key]);
+        }
+        
+        return $return;
      }
      
     private function getCurrTime () {

@@ -34,13 +34,12 @@ class Autoloader {
         	}
         }
 	
-		if (class_exists($class)) {
-			return;
+		if (!class_exists($class)) {
+			trigger_error('Class '.$class.' not found');
 		};
 		
-		eval("class $class {
-            function __construct() {
-                throw new AbstractException('Class $class not found');
-            }}");
+		return;
+		
+
 	}
 }

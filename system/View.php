@@ -4,6 +4,8 @@ class View {
 	private $viewPath = false;
 	private $_pageTitle = '';
 	private $_pageDescription = '';
+	private $_pageKeywords = '';
+	public $controller = '';
 	
 	private $data = array();
 	
@@ -33,7 +35,7 @@ class View {
 	public function render() {
 		extract($this->data);
 		
-		$this->_checkFileExist($this->viewPath,'нет файла вида');
+		$this->_checkFileExist($this->viewPath, 'нет файла вида');
 		
 		ob_start();
 			require_once $this->viewPath;
@@ -41,7 +43,8 @@ class View {
 		
 		$title = $this->_getPageTitlePrefix().' - '.$this->_getPageTitle();
 		$description = $this->_getPageDescrioption();
-		
+		$keywords = $this->_getPageKeywords();
+		$controller = $this->controller;		
 		require_once $this->layout;
 	}
 	
@@ -78,6 +81,16 @@ class View {
 	}
 	public function _getPageDescrioption($description='') {
 		return $this->_pageDescription;
+	}
+	
+/**
+ * Keyworrds
+ */	
+	public function setPageKeywords($keys='') {
+		$this->_pageKeywords = $keys;
+	}
+	public function _getPageKeywords($keys='') {
+		return $this->_pageKeywords;
 	}
 	
 ////////////////////////

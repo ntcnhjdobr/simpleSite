@@ -120,7 +120,7 @@ class PhpResizer_PhpResizer {
     protected function _validateCacheDir()
     {
         $dir = $this->_cacheDir;
-        if (!is_writable($dir) || !is_executable($dir)) {
+        if (!is_writable($dir)) {
             $message = sprintf(self::EXC_CACHEDIR_NOT_EXISTS, $dir);
             throw new PhpResizer_Exception_Basic($message);
         }
