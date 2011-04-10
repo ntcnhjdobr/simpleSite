@@ -5,7 +5,7 @@ $config['showErrors']=false;
 
 $config['debugger']=array(
 	'enabled'=>false
-);
+);     ;
 
 $config['googleAnalytics']=array(
 	'isEnabled'=>true
