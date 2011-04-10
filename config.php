@@ -1,19 +1,15 @@
 <?php
-$config=array();
+$config=array();;
 
 $config['showErrors']=false;
 
 $config['debugger']=array(
 	'enabled'=>false
-);     ;
+);
 
 $config['googleAnalytics']=array(
 	'isEnabled'=>true
 );
-
-// bad test line
-$config['sdf'] = 'dddfsdf';
-//
 
 
 //$config['db']=array(
