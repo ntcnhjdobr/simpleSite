@@ -1,3 +1,4 @@
 tmp/
 logs/
-files/upload/sample
+files/upload/sample/
+system/Config/config.php
