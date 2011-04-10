@@ -11,6 +11,10 @@ $config['googleAnalytics']=array(
 	'isEnabled'=>true
 );
 
+// bad test line
+$config['sdf'] = 'dddfsdf';
+//
+
 
 //$config['db']=array(
 //	'host' => 'localhost',
