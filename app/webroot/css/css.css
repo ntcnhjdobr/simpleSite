@@ -4,6 +4,7 @@
 }
 
 html,body {
+	min-width: 860px;
 	height: 100%;
 	font: normal 13px/1.3 Century Gothic, sans-serif;
 }
@@ -20,7 +21,6 @@ Global settings
 
 ul li {
 	list-style-type: none;
-	
 }
 
 a {outline: none;}
@@ -54,7 +54,7 @@ Layout settings
 
 	#header {
 		width: auto;
-		padding: 10px 50px;
+		padding: 10px 30px 10px 50px;
 	}
 	
 		#header .logo{
@@ -124,7 +124,7 @@ MENU
 	font-size: 14px;
 	margin-top: 20px;
 	width: auto;
-	float: right;		
+	float: right;
 }
 
 .jqueryslidemenu ul li{
@@ -138,7 +138,7 @@ MENU
 .jqueryslidemenu ul li a, .jqueryslidemenu ul li span{
 	text-decoration: none;
 	display: block;
-	padding: 0 0.5em 0 60px;
+	padding: 0 0.5em 0 40px;
 }
 
 .jqueryslidemenu ul li span {
@@ -169,13 +169,13 @@ MENU
 	
 /*1st sub level menu*/
 .jqueryslidemenu ul li ul{
+	z-index: 1500;
 	padding-top: 8px;
 	position: absolute;
 	left: 0;
 	display: block;
-	visibility: hidden;	
+	visibility: hidden;
 }
-
 /*Sub level menu list items (undo style from Top level List Items)*/
 .jqueryslidemenu ul li ul li{
 	display: list-item;
@@ -193,7 +193,7 @@ MENU
 	height: 22px;
 	width: 160px; /*width of sub menus*/
 	padding: 0 0.5em 0 10px;
-	margin: 0 0 0 50px;
+	margin: 0 0 0 30px;
 	background: url('/app/webroot/img/icons/black25.png');
 }
 
@@ -559,3 +559,30 @@ img.hanna_pic {
 		.projectText a.next span.none {
 			background-position: 0px -150px;
 		}
+
+		/* startpage */
+.startpage {
+	width: 100px;
+	margin: 15px auto 0 auto;
+			box-shadow: 0 0 20px #000;
+			-moz-box-shadow: 0  0 20px #000;
+			-webkit-box-shadow: 0 0 20px #000;
+}
+
+.startpage a {
+	display: block;
+	text-decoration: none;
+}
+
+.startpage a span {
+	display: block;
+	position: relative;
+	bottom: 20px;
+	background: url('/app/webroot/img/icons/black50.png');
+	color: white;
+	text-align: center;
+	z-index: 1000;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	-moz-opacity: 0;
+}

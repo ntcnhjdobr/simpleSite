@@ -2,14 +2,14 @@
 class Helper_Image
 {
 	const ADMINPREVIEW = 'adminpreview';
-	const CAROUSEL = 'prev_carousel';
+	const STARTPAGE = 'startpage';
 	const PREVIEW_PROJECT = 'prev_proj';
 	const PREVIEW_SAMPLE = 'prev_sample';
 	const SAMPLE = 'sample';
 	const MICRO_PREV = 'micro_pre';
 	
 	
-	static public function render ($path, $type, $atrs = array()) 
+	static public function render ($path, $type, $atrs = array())
 	{
 		$path = '/'.str_replace(ROOT_PATH, '', $path);
 

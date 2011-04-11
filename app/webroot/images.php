@@ -5,11 +5,11 @@
 $file= (isset($_GET['file'])) ? $_GET['file'] : '';
 
 $options = array(
-	// карусель
-	'prev_carousel'=>array(
-		'width' => 170,
-		'height' => 170,
-		'aspect' => true,
+	// на главной странице
+	'startpage'=>array(
+		'width' => 700,
+		'height' => 350,
+		'aspect' => false,
 		'crop' => 100
 	),
 	// предпромотр проекта
@@ -52,13 +52,12 @@ if (isset($_GET['type']) AND isset($options[$_GET['type']])) {
 	$opt =  $options[$_GET['type']];
 	
 	if ($_GET['type']=='sample' && isset($_GET['w']) && isset($_GET['h'])){
-		$k = 0.65;  
+		$k = 0.65;
 		$w =  (int) $_GET['w'];
 		$h =  (int) $_GET['h'];
 		$round = 10;
 		$opt['width'] = floor($w*$k/$round)*$round;
 		$opt['height'] = floor($h*$k/$round)*$round;
-		
 	}elseif ($_GET['type']=='prev_proj'){
 		$k = 0.3;
 		$round = 10;
@@ -67,9 +66,15 @@ if (isset($_GET['type']) AND isset($options[$_GET['type']])) {
 		}else{
 			$opt['height'] = 200;
 		}
+	}elseif ($_GET['type']=='startpage' && isset($_GET['w']) && isset($_GET['h'])){
+		$k = 0.4;
+		$w =  (int) $_GET['w'];
+		$h =  (int) $_GET['h'];
+		$round = 10;
+		$opt['height'] = floor($h*$k/$round)*$round;
+		$opt['width'] = $opt['height']*2;
 	}
-	
-	
+
 	$rootPath = dirname(dirname(dirname(__FILE__))).'/';
 }else {
 	$opt = array();
@@ -87,8 +92,8 @@ try {
 	$resizer = new PhpResizer_PhpResizer(array (
 		'cacheDir'=>realpath(dirname(__FILE__) . '/../../tmp/PhpResizer/'),
 		'tmpDir'=>realpath(dirname(__FILE__) . '/../../tmp/tmp/'),
-		'cache'=>false,
-		'cacheBrowser'=>false,
+		'cache'=>true,
+		'cacheBrowser'=>true,
 		'engine'=>PhpResizer_PhpResizer::ENGINE_GD2
 		)
 	);

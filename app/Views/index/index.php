@@ -1,154 +1,70 @@
-<style>
-<!--
+<?php
+$prefix =  Helper_Image::render(WEBROOT_PATH.'img/startpage/TMPNAME', Helper_Image::STARTPAGE, false);
+$images = array('1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg');
+$dataJS = array();
 
-.startpage {min-height: 350px;}
-
-.startpage a {
-	display: block;
- 	float: left;
-	text-decoration: none;
-	padding: 10px;	
-	position: absolute;
-	top: 180px;
-}
-
-a.block_0 {		
-	left: 200px; 	
-}
-
-a.block_1 {
-	left: 400px; 	
-}
-
-a.block_2 {		
-	left: 600px; 	
-}
-
-a.block_3 {
-	top: 300px;
-	left: 200px; 	
-}
-a.block_4 {
-	top: 300px;
-	left: 400px; 	
-}
-a.block_5 {
-	top: 300px;
-	left: 600px; 	
-}
-
-.startpage a span {
-	display: block;
-	position: relative;
-	bottom: 20px;
-	background: url('/app/webroot/img/icons/black50.png');
-	color: white;
-	text-align: center;
-	z-index: 1000;
- 	 opacity: 0;
-  	filter: alpha(opacity=0);
-  	-moz-opacity: 0;
-}
--->
-</style>
-
-<?php 
-$prefix = Helper_Html::link('/img/startpage/');
-$images = array(
-	array('1_1.jpg','1_2.jpg'),
-	array('2_1.jpg','2_2.jpg'),
-	array('3_1.jpg','3_2.jpg'),
-	array('4_1.jpg','4_2.jpg'),
-	array('5_1.jpg','5_2.jpg'),
-	array('6_1.jpg','6_2.jpg'),
-);
-foreach ($images as &$image) {
-	foreach ($image as &$path){
-			$path=$prefix.$path;
+foreach ($sections as $key=>$section){
+	$dataJS[$key]['sectionName']=Helper_Text::clean($section['title']);
+	$dataJS[$key]['aUrl']=Helper_Html::link(array('controller'=>'index','action'=>'section','param1'=>$section['title']));
+	if (isset($images[$key])) {
+		$dataJS[$key]['imgUrl']=str_replace('TMPNAME',$images[$key],$prefix);
 	}
 }
 ?>
+
+<div class="startpage" style="display: none">
+	<a href="<?php echo $dataJS[0]['aUrl']?>">
+		<div class="rotatorCont">
+			<img src="<?php echo $dataJS[0]['imgUrl']?>&w=1024&h=575" />
+		</div>
+		<span><?php echo $dataJS[0]['sectionName']?></span>
+	</a>
+</div>
+
+<br style="clear: both" />
+
 <script type="text/javascript">
-<!--
-var images = <?php echo json_encode($images)?>;
+var images = <?php echo json_encode($dataJS)?>;
+window.errorCounter = 0;
+window.imageCounter = 0;
 
 $(document).ready(function() {
 	$(".startpage a").hover(
 			  function () {$(this).children('span').fadeTo("fast",1)},
 			  function () {$(this).children('span').fadeTo("fast",0)}
 	);
-	setTimeout("rotateImage()", 1000);
+	showNextImage();
 })
-
-
-function rotateImage() {
-	getSectionForRotate(); 
-}
-
-function getSectionForRotate() {
 	
-	window.newSection = Math.round(<?php echo count($sections)-1;?> * Math.random());	
 
-	if (window.section == window.newSection)
-	{
-		console.info('e');
-		if (!window.error) {
-			window.error=0;
-		}
-		window.error++;
-		if (window.error>50){
-			console.info('stop');
-			return false;
-		}
-		
-		return getSectionForRotate();
+function showNextImage()
+{
+	var image = images[window.imageCounter];
+	if(!image) {
+		var image = images[0];
+		window.imageCounter = 0;
 	}
-		
-	setTimeout("rotateImage()", 300);
 	
-	var index = Math.round(Math.random() * images[window.newSection].length);
-	var path = images[window.newSection][index]; 	
-	
-	showImage(window.newSection, images[window.newSection][index]);		
+	var img = new Image();
+    $(img).load(function ()
+	{
+		var imageLoading = $(this);
+		$('.startpage a').attr('href',image['aUrl']);
+		$('.startpage').css({width: this.width, height: this.height});
+
+		$('.startpage').fadeOut(700,function(){
+			$('.startpage span').html(image.sectionName);
+			$('.rotatorCont').html(imageLoading);
+			$('.startpage').fadeIn(700);
+		});
+
+		window.imageCounter++;
+		setTimeout("showNextImage()", 3000);
+    }).error(function () {
+        window.errorCounter++;
+		if (window.errorCounter < 10) {
+			showNextImage();
+		}
+    }).attr('src', image['imgUrl']+'&w='+$(window).width()+'&h='+$(window).height());
 }
-
-function showImage(id, path){
-
-	var block = $('.startpage a.block_'+id+' .rotatorCont')
-	
-		var img = new Image();
-	    $(img).load(function () {		    
-	    	window.section = id;
-			var imageLoading = $(this);	   	
-	    	$(block).html(imageLoading);    			    						    
-
-	    }).error(function () {
-			alert('не загрузилась');
-	    }).attr('src', path);	    
-}
-
-
 </script>
-
-<?php $blockImage = array_slice($block, 0, count($block)/2); ?>
-
-<div class="startpage">
-
-	<?php 
-	
-	for ($i=0; $i<count($sections); $i++) { ?>	
-		<a class="block_<?php echo $i; ?>"		
-			href="<?php echo Helper_Html::link(			
-				array('controller'=>'index','action'=>'section','param1'=>$sections[$i]['title']));?>">
-			<?php //echo Helper_Image::renderSample($sample['sample_id'], Helper_Image::CAROUSEL, array('alt'=>$sample['project_title'])); ?>
-			<div class="rotatorCont">
-				<img src="<?php echo $images[$i][array_rand($images[$i])];?>" />
-			</div>			
-			<span><?php echo $sections[$i]['title']?></span>
-		</a>	
-	<?php
-	}?>
-</div>
-
-<br style="clear: both" />
-
