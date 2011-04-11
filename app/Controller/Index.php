@@ -155,13 +155,12 @@ class Controller_Index extends AbstractController
 		$samples = Model_Sample::instance()->getAll($conditions);
 		
 
-
-		
-
-//var_dump ($samples);
-
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) AND strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-			echo View::factory('element/project',array('samples'=>$samples,'sample_id'=>$sample_id));
+			echo View::factory('element/project',array(
+			'samples'=>$samples,
+			'sample_id'=>$sample_id,
+			'projectCurr'=>$projectCurr
+			));
 			exit();
 		}
 		

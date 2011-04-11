@@ -50,10 +50,12 @@ foreach ($samples as $sample){
 		
 	<div class="sampleDescription">
 		<?php 
-		if (isset($resortSamples[$sample_id])){
+		if (isset($resortSamples[$sample_id]) && $resortSamples[$sample_id]['text']){
 			echo $resortSamples[$sample_id]['text'];	
-		}else{
+		}elseif($samples[0]['text']){
 			echo $samples[0]['text'];
+		}elseif($sample_id == $samples[0]['id']){
+			echo $projectCurr['text'];
 		}
  		?>
 	</div>				
