@@ -12,7 +12,7 @@
  
 <div id="overlay"></div>
 <div class="overlayBlock"></div>
-	<h1 class="sectionTitle"><?php echo $sectionCurr['title']?></h1>
+
 <div class="sliderContent">
 
 	<div class="grad grad-right"></div>
@@ -42,9 +42,13 @@
 		          	</a>
 		          	<span><?php echo $sample['project_title']?></span>
 			</div>
-		<?php } ?>	
+		<?php } ?>
 		
 	</div>
 </div>
 <div id="slider"></div>
+<br/><br/><br/><br/><br/>
+<h1 class="sectionTitle">
+	<img src="<?php echo Helper_Html::link('/img/icons/sections/'.$sectionCurr['id'].'.png')?>" />
+</h1>
 

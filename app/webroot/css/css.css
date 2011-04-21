@@ -229,9 +229,9 @@ SLIDER
 	position:relative;
 }
 	h1.sectionTitle {
+		clear: both;
+		text-align: right;
 		color: white;
-		float: right;
-		//background: url('/app/webroot/img/icons/white25.png');
 		padding: 0 30px;
 		font-size: 16px;
 	}
