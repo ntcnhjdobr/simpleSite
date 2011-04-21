@@ -12,9 +12,9 @@
  
 <div id="overlay"></div>
 <div class="overlayBlock"></div>
-	
+	<h1 class="sectionTitle"><?php echo $sectionCurr['title']?></h1>
 <div class="sliderContent">
-  	
+
 	<div class="grad grad-right"></div>
 	<div class="grad grad-left"></div>	
 	 

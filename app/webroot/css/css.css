@@ -70,6 +70,17 @@ Layout settings
 	height: 170px;
 }
 
+#footerSection {
+	height: 20px;
+	width: auto;
+	font-size: 10px;
+	padding-top: 150px;
+	text-align: right;
+	padding-right: 30px;
+	color: gray;
+	//background: url('/app/webroot/img/icons/footer-image.png') bottom center no-repeat;
+}
+
 #footer {	
 	width: auto;
 	border-top: 1px solid #555;
@@ -77,17 +88,16 @@ Layout settings
 	margin: 0 50px;
 	//background: url('/app/webroot/img/icons/footer-image.png') bottom center no-repeat;
 }
+
 	#footer .footer_container {
 		width: 680px;
 		margin: 0 auto;
 	}
 	
-	#footer .column {	
-			
+	#footer .column {
 		width: 200px;
 		padding: 0 10px;
 		float: left;
-		
 	}
 		#footer .column h2{
 			font-size: 10pt; 
@@ -218,6 +228,13 @@ SLIDER
 	overflow: hidden;
 	position:relative;
 }
+	h1.sectionTitle {
+		color: white;
+		float: right;
+		//background: url('/app/webroot/img/icons/white25.png');
+		padding: 0 30px;
+		font-size: 16px;
+	}
 
 	.no_js .sliderContent {
 		width: auto;
@@ -323,27 +340,37 @@ PROJECT
 */
 	.sampleTitle {
 		float: right;
+		position: absolute;
+		background: url('/app/webroot/img/icons/black50.png');
+		right: 0;
+		padding: 0 10px 0 5px;
+		z-index: 2;
 	}
-	
+
 	.sampleCollection {
-		padding-bottom: 5px;		
+		overflow: hidden;
+		height: 55px;
 	}
-	
-	.sampleCollection a { 
-		background: url(/app/webroot/img/icons/sample_marker.png) no-repeat 0px -16px;
+
+	.sampleCollection a {
+		//background: url(/app/webroot/img/icons/sample_marker.png) no-repeat 0px -16px;
 		display: block;
 		float: left;
-		height: 16px;
-		width: 16px;
-		padding-right: 2px; 
+		margin-right: 2px;
+		//height: 16px;
+		//width: 16px;
+		border: 1px solid black;
+		line-height: 0px;
 		}
 		
 	.sampleCollection a.select {
-		background-position: 0px 0px;
+		border: 1px solid white;
+		//background-position: 0px 0px;
 	} 
 	
 	.sampleCollection a:hover {
-		background-position: 0px -32px;
+		border: 1px solid red;
+		//background-position: 0px -32px;
 	} 
 
 		
@@ -563,7 +590,7 @@ img.hanna_pic {
 		/* startpage */
 .startpage {
 	width: 100px;
-	margin: 15px auto 0 auto;
+	margin: 35px auto 0 auto;
 			box-shadow: 0 0 20px #000;
 			-moz-box-shadow: 0  0 20px #000;
 			-webkit-box-shadow: 0 0 20px #000;
@@ -575,9 +602,11 @@ img.hanna_pic {
 }
 
 .startpage a span {
+	font-size: 14px;
+	line-height: 24px;
 	display: block;
 	position: relative;
-	bottom: 20px;
+	bottom: 26px;
 	background: url('/app/webroot/img/icons/black50.png');
 	color: white;
 	text-align: center;

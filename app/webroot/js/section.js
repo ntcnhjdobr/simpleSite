@@ -1,4 +1,3 @@
-
 	function loadImage(src, blockId) {
 		imageLoader++;
 		
@@ -23,7 +22,7 @@
 	    }).error(function () {
 	        alert('не загрузится');
 	        // notify the user that the image could not be loaded
-	    }).attr('src', src+'&w='+$(window).width()+'&h='+$(window).height());    
+	    }).attr('src', src+'&w='+$(window).width()+'&h='+$(window).height());
 	}
 
 	function loadImage2(src, blockId, id) {
@@ -32,12 +31,14 @@
 		
 	    var img = new Image();
 	    $(img).load(function () {
-	        //$(this).css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
+
 			var imageLoading = $(this);		
 
+			//check width-height description container
 			$(idDesc).width(this.width);
 			var newWidth = this.width;
-			var newHeight = this.height+$(idDesc).height()+18+5;
+
+			var newHeight = this.height+$(idDesc).height()+53;// height sampleCollection
 
 			$('.overlayBlock').animate(
 				{
@@ -51,10 +52,9 @@
 				    	$(blockId).next().css({color: "white", width: "auto"});
 				    });
 				}
-			);		
+			);
 	    }).error(function () {
 	        alert('не загрузится');
-	        // notify the user that the image could not be loaded
 	    }).attr('src', src+'&w='+$(window).width()+'&h='+$(window).height());
 	    
 	}
@@ -85,7 +85,7 @@
 				    slide: function(event, ui) {setLeft(ui.value)},
 				    step: 0.3
 				}
-			);		
+			);
 		}else{
 			var left = $('.sliderContent').width()/2 - viewerWidth/2;
 			$('.viewer').animate({left: left})

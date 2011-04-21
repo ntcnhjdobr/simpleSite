@@ -88,15 +88,17 @@ class Controller_Index extends AbstractController
 //		}
 //		$allSamples = $tmpSamples;
 		
+		
 		$this->view->setPageDescription($sectionCurr['text']);
-		$this->view->setPageTitle($sectionCurr['title']);	
-		
-		
+		$this->view->setPageTitle($sectionCurr['title']);
+
+
 //		$this->view->set('projects', $projects); // для лицевых картинок
 //		$this->view->set('allSamples', $allSamples); // для модального окна
-		
-		//$this->view->set('samplesCountMod', $this->_getSamplesCount($sectionCurr['id']);		
-// $this->view->set('sectionCurr', $sectionCurr);
+
+		//$this->view->set('samplesCountMod', $this->_getSamplesCount($sectionCurr['id']);
+
+		$this->view->set('sectionCurr', $sectionCurr);
 		$this->view->set('sample_id', $sample_id);
 		
 		$this->view->set('sections', $sections);

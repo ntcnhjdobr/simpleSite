@@ -1,6 +1,3 @@
-<?php if ($_SERVER['REQUEST_URI'] !== '/') {
-	return; 	
-}?>
 <div id="footer">
 <div class="footer_container">
 		<div class="column first">	

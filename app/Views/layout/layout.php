@@ -76,13 +76,16 @@
 		
 	
 	
-		<div class="footerPush" <?php if ($_SERVER['REQUEST_URI'] !== '/') {echo 'style="height: 0px;"'; } ?>></div>
+		<div class="footerPush" <?php if ($_SERVER['REQUEST_URI'] !== '/') {echo 'style="height: 0px;"'; } ?>>
+		</div>
 	</div>
  
-	
-	<?php echo View::factory('element/footer'); ?>	
-	
-	
+	<?php if ($_SERVER['REQUEST_URI'] !== '/') {
+		echo View::factory('element/footerSections');
+	}else{
+		echo View::factory('element/footer');
+	}?>
+
 <?php $render = Debugger::getInstance()->render();?>
 <?php if ($render) { 
 	echo '<div class="debug-panel">';

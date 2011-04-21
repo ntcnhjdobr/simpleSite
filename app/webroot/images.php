@@ -42,9 +42,9 @@ $options = array(
 	),
 	'micro_pre'=>array(  
 		'width' => 60,
-		'height' => 60,
+		'height' => 50,
 		'aspect' => false,
-		'crop' => 70
+		'crop' => 60
 	),
 );
 

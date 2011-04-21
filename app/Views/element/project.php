@@ -21,21 +21,29 @@ foreach ($samples as $sample){
 			$flag = !isset($resortSamples[$sample_id]);
 			
 			foreach ($samples as $sample) {
+
 				if ($flag) {
-					$class='select';
+					$class = 'select';
 					$flag = false;
 				}else{
-					$class='';
+					$class = '';
 					if ($sample['id'] == $sample_id){
 						$class='select';
 					}
 				}
 		?>
 			
-			<a href="<?php echo Helper_Html::link(array('controller'=>'index','action'=>'project','param1'=>$sample['project_title'],'param2'=>$sample['id']));?>" id="<?php echo $sample['id']?>" class="<?php echo $class;?>"></a>
+			<a href="<?php echo Helper_Html::link(array('controller'=>'index','action'=>'project','param1'=>$sample['project_title'],'param2'=>$sample['id']));?>" id="<?php echo $sample['id']?>" class="<?php echo $class;?>"><?php echo Helper_Image::renderSample($sample['id'], Helper_Image::MICRO_PREV); ?></a>
 			
 			<div class="container" id="desc_<?php echo $sample['id'];?>">
-				<?php echo $sample['text']?>
+			<?php
+				if ($sample['text']){
+					echo $sample['text'];
+				}elseif($sample_id == $samples[0]['id']){
+					echo $projectCurr['text'];
+				}
+			?>
+
 			</div>
 			<div class="container" id="title_<?php echo $sample['id'];?>">
 				<?php echo $sample['title']?>
@@ -44,28 +52,24 @@ foreach ($samples as $sample){
 	 	&nbsp;
 	</div>
 
-	<div class="image loadingBg2" title="Кликните чтоб перейти к следующему изображению">
-		&nbsp;
-	</div>	
-		
+	<div class="image loadingBg2" title="Перейти к следующему изображению...">&nbsp;</div>
+
 	<div class="sampleDescription">
-		<?php 
+		<?php
 		if (isset($resortSamples[$sample_id]) && $resortSamples[$sample_id]['text']){
-			echo $resortSamples[$sample_id]['text'];	
-		}elseif($samples[0]['text']){
-			echo $samples[0]['text'];
+			echo $resortSamples[$sample_id]['text'];
 		}elseif($sample_id == $samples[0]['id']){
 			echo $projectCurr['text'];
 		}
  		?>
-	</div>				
+	</div>
 </div>
 
-<?php 
+<?php
 if (!isset($resortSamples[$sample_id])){
 	$sample_id = $samples[0]['id'];
-}
- ?>
+} ?>
+
 <script type="text/javascript">
 	loadImage2('<?php echo Helper_Image::renderSample($sample_id, Helper_Image::SAMPLE, false); ?>', '.image', '<?php echo $sample_id?>');		
 </script>

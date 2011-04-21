@@ -1,34 +1,34 @@
-	function centredOverlayBlock(){
-		$('.overlayBlock').css({
-			'left':$(window).width()/2-($('.overlayBlock').width())/2+'px', 
-			'top':$(window).height()/4-($('.overlayBlock').height())/4+'px'}
-		);
-	}
-	
-  	 function centerSlider () { 
-  		 var topBorder  = ($(window).height()-$('#header').outerHeight())/5+"px";
-  		 $('.sliderContent').css({top: topBorder});  		 
-  		 $('#slider').css({top: topBorder});
-  	 }
-	 
+function centredOverlayBlock(){
+	$('.overlayBlock').css({
+		'left':$(window).width()/2-($('.overlayBlock').width())/2+'px',
+		'top':$(window).height()/4-($('.overlayBlock').height())/4+'px'}
+	)
+}
+
+ function centerSlider () {
+	 var topBorder  = ($(window).height()-$('#header').outerHeight())/5+"px";
+	 $('.sliderContent').css({top: topBorder});
+	 $('#slider').css({top: topBorder});
+ }
+
 $(document).ready(function() {
-	
+
 	 var ua = navigator.userAgent.toLowerCase();
 	 if (ua.indexOf("msie") != -1 && ua.indexOf("opera") == -1 && ua.indexOf("webtv") == -1) {
-		 var historyOptions = {};  
+		 var historyOptions = {};
 	 }else{
 		 var historyOptions = { unescape: "/,%" }; 
 	 }
 	
 	 $.history.init(loadContent, historyOptions);
 	 	 
- 	$('.item a').click(function() {
+	 $('.item a').click(function() {
  		$('.overlayBlock').width(300);
  		$('.overlayBlock').height(250);
  		centredOverlayBlock(); 		
 		$.history.load($(this).attr('href'));
 		return false;
-	});
+	 });
 
 	
 	$('.sampleCollection a').live('click', function() {
@@ -37,6 +37,7 @@ $(document).ready(function() {
 	});
 	
 	$('.image').live('click', function() {
+		// 3 next()  - 2-BlockContainer
 		var clicker = $('.sampleCollection a.select').next().next().next(); 
 		if (clicker.length) {			
 			clicker.trigger('click');
@@ -46,9 +47,9 @@ $(document).ready(function() {
 	});
 	
 	$(".item").hover(
-			  function () {$(this).children('span').fadeTo("fast",1)},
-			  function () {$(this).children('span').fadeTo("fast",0)}
-			);
+	  function () {$(this).children('span').fadeTo("fast",1)},
+	  function () {$(this).children('span').fadeTo("fast",0)}
+	);
 });
 
 

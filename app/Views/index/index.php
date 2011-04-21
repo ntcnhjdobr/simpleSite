@@ -9,8 +9,7 @@ foreach ($sections as $key=>$section){
 	if (isset($images[$key])) {
 		$dataJS[$key]['imgUrl']=str_replace('TMPNAME',$images[$key],$prefix);
 	}
-}
-?>
+} ?>
 
 <div class="startpage" style="display: none">
 	<a href="<?php echo $dataJS[0]['aUrl']?>">
@@ -51,7 +50,6 @@ function showNextImage()
 		var imageLoading = $(this);
 		$('.startpage a').attr('href',image['aUrl']);
 		$('.startpage').css({width: this.width, height: this.height});
-
 		$('.startpage').fadeOut(700,function(){
 			$('.startpage span').html(image.sectionName);
 			$('.rotatorCont').html(imageLoading);
