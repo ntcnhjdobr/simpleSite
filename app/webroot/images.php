@@ -52,9 +52,13 @@ if (isset($_GET['type']) AND isset($options[$_GET['type']])) {
 	$opt =  $options[$_GET['type']];
 	
 	if ($_GET['type']=='sample' && isset($_GET['w']) && isset($_GET['h'])){
-		$k = 0.93;
+		$k = 0.90;
 		$w =  (int) $_GET['w'];
 		$h =  (int) $_GET['h'];
+
+		$maxWidth = 800;
+		$w =  $w > $maxWidth ? $maxWidth : $w;
+
 		$round = 10;
 		$opt['width'] = floor($w*$k/$round)*$round;
 		$opt['height'] = floor($h*$k/$round)*$round;

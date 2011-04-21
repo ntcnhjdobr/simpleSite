@@ -12,7 +12,6 @@ function centredOverlayBlock(){
  }
 
 $(document).ready(function() {
-
 	 var ua = navigator.userAgent.toLowerCase();
 	 if (ua.indexOf("msie") != -1 && ua.indexOf("opera") == -1 && ua.indexOf("webtv") == -1) {
 		 var historyOptions = {};
@@ -35,9 +34,9 @@ $(document).ready(function() {
 		$.history.load($(this).attr('href'));
 		return false;
 	});
-	
+
 	$('.image').live('click', function() {
-		// 3 next()  - 2-BlockContainer
+		// 3 next()  2-BlockContainer
 		var clicker = $('.sampleCollection a.select').next().next().next(); 
 		if (clicker.length) {			
 			clicker.trigger('click');
@@ -55,7 +54,6 @@ $(document).ready(function() {
 
 
 function loadContent(hash) {
-
 	if(hash != "") {		
 		show_overlay(0.7);		
 		$('.overlayBlock').fadeIn();			
@@ -72,18 +70,16 @@ function closeLightbox() {
 			$(this).empty().width('auto').height('auto');
 			}
 		);
-	
+
 	var href = window.location.href;
-	
+
 	if(href.indexOf("#")!=-1) {
 		var posHash =  href.indexOf("#");
 		var newHref = href.slice(0, posHash);
         window.location.href = newHref+'#';
     };
-
        
 	$('#overlay').fadeOut(200);
-	
 	return false;
 }
 

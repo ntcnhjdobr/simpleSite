@@ -3,7 +3,7 @@
 		
 	    var img = new Image();
 	    $(img).load(function () {
-	        //$(this).css('display', 'none'); // .hide() doesn't work in Safari when the element isn't on the DOM already
+
 			var imageLoading = $(this);
 		
 			$(blockId).animate(
@@ -18,10 +18,8 @@
 		    	$(blockId).removeClass('loadingBg').html(imageLoading).fadeIn(300);    			    			
 		    });
 		   	centerSlider();
-	     	
 	    }).error(function () {
 	        alert('не загрузится');
-	        // notify the user that the image could not be loaded
 	    }).attr('src', src+'&w='+$(window).width()+'&h='+$(window).height());
 	}
 
@@ -59,7 +57,6 @@
 			);
 	    }).error(function () {
 	    }).attr('src', src+'&w='+$(window).width()+'&h='+($(window).height()-newHeightExpirience-30));
-	    
 	}
 
 
@@ -68,7 +65,7 @@
 		if (imageLoader==0){
 			imageIsLoader = true;
 		}
-		
+
 		if (!imageIsLoader) {
 			setTimeout ("renderScroll()",200);
 			return;
@@ -119,8 +116,6 @@
 		);
 								
 
-		
-
 			
 		$('#overlay, #close').click(function() {
 			closeLightbox();
@@ -130,18 +125,18 @@
 
 
 	$(window).resize(
-			function() { 
-				centredOverlayBlock();
-				centerSlider();
-				if (viewerWidth < $('.sliderContent').width()) {
-					var left = $('.sliderContent').width()/2 - viewerWidth/2;
-					$('.viewer').css({left: left+'px'});
-					$('#slider').fadeOut();
-				}else{				
-					$('#slider').fadeIn();
-					setLeft($( "#slider" ).slider( "option", "value" ));
-				}					
-		})
+		function() {
+			centredOverlayBlock();
+			centerSlider();
+			if (viewerWidth < $('.sliderContent').width()) {
+				var left = $('.sliderContent').width()/2 - viewerWidth/2;
+				$('.viewer').css({left: left+'px'});
+				$('#slider').fadeOut();
+			}else{
+				$('#slider').fadeIn();
+				setLeft($( "#slider" ).slider( "option", "value" ));
+			}
+	})
 
 
 	function show_overlay(op) {
@@ -153,15 +148,13 @@
 
 
 
-
-
 	function setLeft (procent) {
 		var left = procent*(viewerWidth - $('.sliderContent').width())/100;
 		$('.viewer').css('right',left)
 	}
 
 	function autoSlider() {
-		
+
 		if (imageLoader!==0) {
 			return;
 		}
