@@ -52,7 +52,7 @@ if (isset($_GET['type']) AND isset($options[$_GET['type']])) {
 	$opt =  $options[$_GET['type']];
 	
 	if ($_GET['type']=='sample' && isset($_GET['w']) && isset($_GET['h'])){
-		$k = 0.65;
+		$k = 0.93;
 		$w =  (int) $_GET['w'];
 		$h =  (int) $_GET['h'];
 		$round = 10;

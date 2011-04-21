@@ -29,16 +29,20 @@
 		var idDesc = '#desc_'+id;
 		//var idTitle = '#title_'+id;
 		
+		var fixedHeight = 53;
+
+		$(idDesc).width(300); // предполагаемый размер
+		var newHeightExpirience = $(idDesc).height()+fixedHeight;
+
 	    var img = new Image();
 	    $(img).load(function () {
-
 			var imageLoading = $(this);		
 
 			//check width-height description container
 			$(idDesc).width(this.width);
 			var newWidth = this.width;
 
-			var newHeight = this.height+$(idDesc).height()+53;// height sampleCollection
+			var newHeight = this.height+$(idDesc).height()+fixedHeight;// height sampleCollection
 
 			$('.overlayBlock').animate(
 				{
@@ -54,8 +58,7 @@
 				}
 			);
 	    }).error(function () {
-	        alert('не загрузится');
-	    }).attr('src', src+'&w='+$(window).width()+'&h='+$(window).height());
+	    }).attr('src', src+'&w='+$(window).width()+'&h='+($(window).height()-newHeightExpirience-30));
 	    
 	}
 
