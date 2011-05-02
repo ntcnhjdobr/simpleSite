@@ -1,26 +1,35 @@
 <?php
 /**
- * @version $Revision: 26 $
+ * @version $Revision: 67 $
  * @category PhpResizer
  * @package PhpResizer
  * @subpackage Engine
- * @author $Author: andrew.stephanoff@gmail.com $ $Date: 2010-11-14 12:11:59 +0200 (Вс, 14 ноя 2010) $
+ * @author $Author: ktotut83@gmail.com $ $Date: 2011-05-02 08:28:36 -0500 (Mon, 02 May 2011) $
  * @license New BSD license
- * @copyright http://phpresizer.org/
+ * @copyright http://code.google.com/p/phpresizer/
  */
 
 /**
  *
  *
  */
-class PhpResizer_Engine_ImageMagic extends PhpResizer_Engine_EngineAbstract  {
-
-    protected $types=array(1 => "gif", "png","jpg","bmp","tif");
+class PhpResizer_Engine_ImageMagic 	
+	extends PhpResizer_Engine_EngineAbstract 
+	implements PhpResizer_Engine_Interface 
+{ 
+	   	
+    protected $types=array(IMAGETYPE_GIF => 'gif', 
+	    IMAGETYPE_JPEG=>'jpeg',
+	    IMAGETYPE_PNG=>'png', 
+	    1000 => 'jpg', 
+	    'bmp', 
+	    'tif',  
+	    'tiff');
 
     // linux command to ImageMagick convert
     private $convertPath='convert';
 
-    protected function _checkEngine () {
+    public function checkEngine () {
         $command = $this->convertPath.' -version';
        
         exec($command, $stringOutput);
@@ -33,36 +42,46 @@ class PhpResizer_Engine_ImageMagic extends PhpResizer_Engine_EngineAbstract  {
     }
 
     public function resize  (array $params=array()) {
-        $this->getParams($params);
-        $size = $this->params['size'];
-        $path = $this->params['path'];
-        $cacheFile = $this->params['cacheFile'];
-        
-        extract($this->calculateParams());
-        
-             $command = $this->convertPath
-                 . ' ' . escapeshellcmd($path) . ' -crop'
-                 . ' ' . $srcWidth.'x'.$srcHeight . '+' . $srcX . '+' . $srcY
-                 . ' -resize ' . $dstWidth . 'x' . $dstHeight
-                 .' -sharpen 1x10'
-                 //.' -colorspace GRAY'
-                //.' -posterize 32'
-                //.' -depth 8'
-                //.' -contrast'
-                //.' -equalize'
-                //.' -normalize'
-                //.' -gamma 1.2'
-                 . ' -quality 85'
-                 //.' -blur 2x4'
-                 //.' -unsharp 0.2x0+300+0'
-                //.' -font arial.ttf -fill white -box "#000000100" -pointsize 12 -annotate +0+10 "  '.$path.' "'
-                //.' -charcoal 2'
-                //.' -colorize 180'
-                //.' -implode 4'
-                //.' -solarize 10' ???
-                //.' -spread 5'
-                 . ' ' . escapeshellcmd($cacheFile);
 
+    	$calculateParams = $this->calculator->checkAndCalculateParams($params);
+        extract($calculateParams);
+        
+    	$this->checkExtOutputFormat($params);        
+        $path = $params['path'];
+        $cacheFile = $params['cacheFile'];
+
+        
+        $oldLocale = setlocale(LC_CTYPE, null);
+        // need for use russian symbols in path (escapeshellarg)
+        setlocale(LC_CTYPE, "en_US.UTF-8"); 
+        
+		$command = $this->convertPath
+        	. ' ' . escapeshellarg($path) . ' -crop'
+            . ' ' . $srcWidth.'x'.$srcHeight . '+' . $srcX . '+' . $srcY
+            . ' -resize ' . $dstWidth . 'x' . $dstHeight
+            . ' -sharpen 1x10'
+            //.' -colorspace GRAY'
+            //.' -posterize 32'
+            //.' -depth 8'
+            //.' -contrast'
+            //.' -equalize'
+            //.' -normalize'
+            //.' -gamma 1.2'
+            . ' -quality '.$quality
+            //.' -blur 2x4'
+            //.' -unsharp 0.2x0+300+0'
+            //.' -font arial.ttf -fill white -box "#000000100" -pointsize 12 -annotate +0+10 "  '.$path.' "'
+            //.' -charcoal 2'
+            //.' -colorize 180'
+            //.' -implode 4'
+            //.' -solarize 10' ???
+            //.' -spread 5'
+            ;
+			if ($background) {
+				$command .= '  -background "#'.$background.'" -gravity center -extent '.$width.'x'.$height;              	
+			}
+            $command .= ' ' . escapeshellarg($cacheFile);
+			setlocale(LC_CTYPE, $oldLocale);
 			exec($command);
             return true;
     }

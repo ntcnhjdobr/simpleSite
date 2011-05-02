@@ -1,25 +1,34 @@
 <?php
 /**
- * @version $Revision: 41 $
+ * @version $Revision: 67 $
  * @category PhpResizer
  * @package PhpResizer
  * @subpackage Engine
- * @author $Author: ktotut83@gmail.com $ $Date: 2010-11-17 21:58:08 +0200 (Ср, 17 ноя 2010) $
+ * @author $Author: ktotut83@gmail.com $ $Date: 2011-05-02 08:28:36 -0500 (Mon, 02 May 2011) $
  * @license New BSD license
- * @copyright http://phpresizer.org/
+ * @copyright http://code.google.com/p/phpresizer/
  */
 
 /**
  *
  */
-class PhpResizer_Engine_GraphicsMagick extends PhpResizer_Engine_EngineAbstract  {
+class PhpResizer_Engine_GraphicsMagick 
+	extends PhpResizer_Engine_EngineAbstract 
+	implements PhpResizer_Engine_Interface 
+{
 
-    protected $types=array(1 => "gif", "png","jpg","bmp","tif");
+	protected $types=array(IMAGETYPE_GIF => 'gif',
+	    IMAGETYPE_JPEG=>'jpeg',
+	    IMAGETYPE_PNG=>'png',
+	    1000 => 'jpg',
+	    'bmp',
+	    'tif',
+	    'tiff');
 
     // linux command to GraphicksMagick
     private $gmPath='gm';
 
-    protected function _checkEngine () {
+    public function checkEngine () {
         $command = $this->gmPath.' version';
         
         exec($command, $stringOutput);
@@ -32,23 +41,35 @@ class PhpResizer_Engine_GraphicsMagick extends PhpResizer_Engine_EngineAbstract 
     }
 
     public function resize  (array $params=array()) {
-        $this->getParams($params);
 
-        $size = $this->params['size'];
-        $path = $this->params['path'];
-        $cacheFile = $this->params['cacheFile'];
-
-        extract($this->calculateParams());
+		$calculateParams = $this->calculator->checkAndCalculateParams($params);
+        extract($calculateParams);
         
-             $command = $this->gmPath.' convert'
-                 . ' ' . escapeshellcmd($path) . ' -crop'
-                 . ' ' . $srcWidth . 'x' . $srcHeight . '+' . $srcX . '+' . $srcY
-                 . ' -resize ' . $dstWidth . 'x' . $dstHeight
-                 . ' -sharpen 1x10'
-                 . ' -quality 75'
-                 . ' ' . escapeshellcmd($cacheFile);
+    	$this->checkExtOutputFormat($params);        
+        $path = $params['path'];
+        $cacheFile = $params['cacheFile'];
+	
+        $oldLocale = setlocale(LC_CTYPE, null);
+        //need for use russian symbols in path escapeshellarg
+        setlocale(LC_CTYPE, "en_US.UTF-8");
+        
+        
+		$command = $this->gmPath.' convert'
+			. ' ' . escapeshellarg($path) . ' -crop'
+            . ' ' . $srcWidth . 'x' . $srcHeight . '+' . $srcX . '+' . $srcY
+            . ' -resize ' . $dstWidth . 'x' . $dstHeight
+            . ' -sharpen 1x10'
+            . ' -quality '.$quality;
+        
+		if ($background) {
+			$command .= '  -background "#'.$background.'" -gravity center -extent '.$width.'x'.$height;              	
+		}
+		
+		setlocale(LC_CTYPE, $oldLocale);
+		
+        $command .= ' ' . escapeshellarg($cacheFile);
+		exec ($command);
 
-            exec($command);
         return true;
     }
 }

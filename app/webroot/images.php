@@ -28,10 +28,11 @@ $options = array(
 	),
 	// Админ
 	'adminpreview'=>array(
-		'width' => 70,
+		'width' => 60,
 		'height' => 50,
 		'aspect' => false,
-		'crop' => 85
+		'crop' => 60
+		//'background'=>'fF0060'
 	),
 	//полноразмерная фотка
 	'sample'=>array(  

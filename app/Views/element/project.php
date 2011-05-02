@@ -32,9 +32,9 @@ foreach ($samples as $sample){
 					}
 				}
 		?>
-			
+
 			<a href="<?php echo Helper_Html::link(array('controller'=>'index','action'=>'project','param1'=>$sample['project_title'],'param2'=>$sample['id']));?>" id="<?php echo $sample['id']?>" class="<?php echo $class;?>"><?php echo Helper_Image::renderSample($sample['id'], Helper_Image::MICRO_PREV); ?></a>
-			
+
 			<div class="container" id="desc_<?php echo $sample['id'];?>">
 			<?php
 				if ($sample['text']){

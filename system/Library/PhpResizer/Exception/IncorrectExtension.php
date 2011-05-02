@@ -1,12 +1,12 @@
 <?php
 /**
- * @version $Revision: 29 $
+ * @version $Revision: 62 $
  * @category PhpResizer
  * @package PhpResizer
  * @subpackage Exception
- * @author $Author: andrew.stephanoff@gmail.com $ $Date: 2010-11-14 12:27:27 +0200 (Вс, 14 ноя 2010) $
+ * @author $Author: ktotut83@gmail.com $ $Date: 2011-04-20 21:58:21 +0300 (Срд, 20 Апр 2011) $
  * @license New BSD license
- * @copyright http://phpresizer.org/
+ * @copyright http://code.google.com/p/phpresizer/
  */
 
 /**
