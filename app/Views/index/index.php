@@ -1,14 +1,11 @@
 <?php
 $prefix =  Helper_Image::render(WEBROOT_PATH.'img/startpage/TMPNAME', Helper_Image::STARTPAGE, false);
-$images = array('1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg');
-$dataJS = array();
 
+$dataJS = array();
 foreach ($sections as $key=>$section){
 	$dataJS[$key]['sectionName']=Helper_Text::clean($section['title']);
 	$dataJS[$key]['aUrl']=Helper_Html::link(array('controller'=>'index','action'=>'section','param1'=>$section['title']));
-	if (isset($images[$key])) {
-		$dataJS[$key]['imgUrl']=str_replace('TMPNAME',$images[$key],$prefix);
-	}
+	$dataJS[$key]['imgUrl']=str_replace('TMPNAME',$section['id'].'.jpg',$prefix);
 } ?>
 
 <div class="startpage" style="display: none">
@@ -61,6 +58,7 @@ function showNextImage()
     }).error(function () {
         window.errorCounter++;
 		if (window.errorCounter < 10) {
+			window.imageCounter++;
 			showNextImage();
 		}
     }).attr('src', image['imgUrl']+'&w='+$(window).width()+'&h='+$(window).height());

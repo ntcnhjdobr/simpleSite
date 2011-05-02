@@ -229,7 +229,7 @@ SLIDER
 	position:relative;
 }
 	h1.sectionTitle {
-		clear: both;
+		position: relative;
 		text-align: right;
 		color: white;
 		padding: 0 30px;

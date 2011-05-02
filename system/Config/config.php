@@ -15,7 +15,7 @@ $config['googleAnalytics']=array(
 $config['db']=array(
 	'host' => 'localhost',
 	'username' => 'root',
-	'pass' =>'BHYfgh8822',
+	'pass' =>'',
 	'db'=>'anna'
 );
 

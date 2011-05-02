@@ -9,6 +9,7 @@ function centredOverlayBlock(){
 	 var topBorder  = ($(window).height()-$('#header').outerHeight())/5+"px";
 	 $('.sliderContent').css({top: topBorder});
 	 $('#slider').css({top: topBorder});
+	 $('.sectionTitle').css({top: topBorder});
  }
 
 $(document).ready(function() {

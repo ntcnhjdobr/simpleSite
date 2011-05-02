@@ -1,6 +1,6 @@
 <?php
 
-//var_dump (PHP_SAPI);
+//var_dump (PHP_SAPI); exit();
 
 //exec('convert',$as);
 //var_dump ($as); 

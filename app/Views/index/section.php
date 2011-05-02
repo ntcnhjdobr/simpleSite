@@ -43,11 +43,11 @@
 		          	<span><?php echo $sample['project_title']?></span>
 			</div>
 		<?php } ?>
-		
+
 	</div>
 </div>
 <div id="slider"></div>
-<br/><br/><br/><br/><br/>
+
 <h1 class="sectionTitle">
 	<img src="<?php echo Helper_Html::link('/img/icons/sections/'.$sectionCurr['id'].'.png')?>" />
 </h1>
