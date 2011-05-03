@@ -25,11 +25,10 @@
 
 	function loadImage2(src, blockId, id) {
 		var idDesc = '#desc_'+id;
-		//var idTitle = '#title_'+id;
-		
+
 		var fixedHeight = 53;
 
-		$(idDesc).width(300); // предполагаемый размер
+		$(idDesc).width(350); // предполагаемый размер
 		var newHeightExpirience = $(idDesc).height()+fixedHeight;
 
 	    var img = new Image();

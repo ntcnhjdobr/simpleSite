@@ -1,8 +1,13 @@
-function centredOverlayBlock(){
+function centredOverlayBlock(width, height){
+	width = width || $('.overlayBlock').width();
+	height = height || $('.overlayBlock').height();
+
 	$('.overlayBlock').css({
-		'left':$(window).width()/2-($('.overlayBlock').width())/2+'px',
-		'top':$(window).height()/4-($('.overlayBlock').height())/4+'px'}
+		'left':$(window).width()/2-width/2+'px',
+		'top':$(window).height()/4-height/4+'px'}
 	)
+	$('.overlayBlock').height(height);
+	$('.overlayBlock').width(width);
 }
 
  function centerSlider () {
