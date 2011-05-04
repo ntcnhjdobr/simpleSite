@@ -1,20 +1,4 @@
 <?php
-
-//var_dump (PHP_SAPI); exit();
-
-//exec('convert',$as);
-//var_dump ($as); 
-//new Imagick();
-//var_dump (get_loaded_extensions ());
-//phpinfo(); exit();
-//var_dump (ini_get('open_basedir'));
-//echo '---------------';
-//var_dump (ini_get('safe_mode_exec_dir'));
-//echo '---------------';
-//
-//
-//	var_dump (exec  ('ls /usr/local/lib/php'));
-//        exit();anna
 define('DS', '/');
 define ('ROOT_PATH',dirname(dirname(dirname(__FILE__))).DS);
 
