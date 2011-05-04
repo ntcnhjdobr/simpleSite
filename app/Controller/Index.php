@@ -36,7 +36,7 @@ class Controller_Index extends AbstractController
 		}
 		
 		if (!isset($sectionCurr)){
-			throw new AbstractException('СЂР°Р·РґРµР» '.$sectionC.' РЅРµ РЅР°Р№РґРµРЅ');
+			throw new AbstractException('Section '.$sectionC.' is not found');
 		}
 		
 						
@@ -125,7 +125,7 @@ class Controller_Index extends AbstractController
 					'where'=>'projects.title ="'.$projectC.'" AND sections.status='.Model_Section::STATUS_ON));
 		
 		if (!isset($projectCurr[0])) {
-			throw new AbstractException('РїСЂРѕРµРєС‚ '.$projectC.' РЅРµ РЅР°Р№РґРµРЅ');
+			throw new AbstractException('Project‚ '.$projectC.' is not found');
 		}
 		
 		$projectC = $projectCurr[0]['title'];
