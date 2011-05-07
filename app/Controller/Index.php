@@ -4,6 +4,7 @@ class Controller_Index extends AbstractController
 
 	public function index () 
 	{
+
 		$this->view->setPageDescription('Дизайн  выставочных стендов, торгового оборудования. Наружная реклама, печатная продукция, полиграфия, рисунки');
 		$this->view->setPageTitle('Брусничка - Вкусные и полезные проекты');
 			
@@ -18,20 +19,20 @@ class Controller_Index extends AbstractController
 		$this->view->set('block', $this->_getBlock());		
 	}
 
-	
+
 	public function section($sectionC, $sample_id='')
 	{
-		
+
 		$sections = Model_Section::instance()->getAll();
-		
+
 		foreach($sections as &$section) {
-			if(mb_strtolower($section['title'],'UTF-8') == mb_strtolower($sectionC,'UTF-8')){				
-				$section['isCurrent'] = true;				
+			if(mb_strtolower($section['title'],'UTF-8') == mb_strtolower($sectionC,'UTF-8')){
+				$section['isCurrent'] = true;
 				$sectionCurr = array(
 					'id'=>$section['id'],
 					'title'=>$section['title'],
 					'text'=>$section['text']
-				); 
+				);
 			}
 		}
 		

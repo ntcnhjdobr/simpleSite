@@ -1,10 +1,14 @@
 <?php
+/**
+ * pattern Singleton
+ * @author niko
+ *
+ */
 class Configuration {
 	
 	static private $instance = null; 
 	
-	private function __construct () {
-	}
+	private function __construct () {}
 	
 	static public function getInstance () {
 		if(!self::$instance){
@@ -49,17 +53,17 @@ class Configuration {
 			$this->$configFile=$config;
 		}
 		
-		if (isset($configPath[4])) {
-			throw new AbstractException('слишков вложенный файл конфигурации');
-		}elseif (isset($configPath[3])) {
-			return $this->return_config($config[$configPath[1]][$configPath[2]][$configPath[3]]); 
-		}elseif(isset($configPath[2])){
-			return $this->return_config($config[$configPath[1]][$configPath[2]]);
-		}elseif(isset($configPath[1])){
-			return $this->return_config($config[$configPath[1]]);
-		}else{
-			return $config;
+		$tmp = $config;
+		for ($i = 0; $i<count($configPath); $i++){
+			if (isset($tmp[$configPath[$i]])){
+				if (!isset($configPath[$i+1])){
+					return $tmp[$configPath[$i]];
+				}else{
+					$tmp = $tmp[$configPath[$i]];
+				}
+			}
 		}
+		throw new AbstractException('config options '.$key.' is not found ');
 	}
 	
 	private function return_config ($path) {

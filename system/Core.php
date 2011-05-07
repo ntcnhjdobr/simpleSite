@@ -25,7 +25,7 @@ class Core
 	                E_USER_NOTICE     => "User Notice",
 	                E_STRICT          => "Runtime Notice"
 	                );
-	                
+
 		Logger::write('error', $errortype[$errno].': '.$errstr.' in '.$errfile.', on line '.$errline);
 
 		if (Configuration::getInstance()->get('config.showErrors')) {
@@ -35,10 +35,10 @@ class Core
 			echo '<br/><br/>';
 			echo '</div>';
 			return false;
-		}else{
-			self::_renderErrorPage();
-			return true;
 		}
+
+		self::_renderErrorPage();
+		return true;
 	}
 	/**
 	 * 
@@ -49,6 +49,14 @@ class Core
 	static public function exceptionHandler ($e)
 	{
 		Logger::write('error',$e->getMessage().PHP_EOL.$e->getFile().PHP_EOL.$e->getLine());
+
+		if (Configuration::getInstance()->get('config.showErrors')) {
+			echo '<h1>'.get_class($e).'</h1>';
+			echo implode(PHP_EOL, array($e->getMessage(),$e->getFile(),$e->getLine()));
+			var_dump ($e);
+			exit();
+		}
+
 		return self::_renderErrorPage($e);
 	}
 	

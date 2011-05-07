@@ -35,11 +35,9 @@ class Autoloader {
         }
 	
 		if (!class_exists($class)) {
-			trigger_error('Class '.$class.' not found');
+			throw new AbstractException('Class '.$class.' not found');
 		};
 		
 		return;
-		
-
 	}
 }
