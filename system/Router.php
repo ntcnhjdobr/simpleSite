@@ -7,23 +7,21 @@ class Router {
 	);
 	
 	public function __construct() {
-	
 	}
 	
-	public function getRouteArray($inputUrl) {
+	public function getRouteArray($inputUrlRaw) {
 		$config = array();
 		
-		$inputUrl = str_replace('_', ' ', $inputUrl); 
+		$inputUrl = rawurldecode(str_replace('_', ' ', $inputUrlRaw)); 
 		$arrayUrl = explode('/',$inputUrl,2);
-		
 
-		
 		if ($project = Model_Project::instance()->getBy('title', $arrayUrl[0])) {
 			$config[] = array('/^('.$project[0]['title'].')(.*)/iu','index/project/$1$2');
 		}elseif($section = Model_Section::instance()->getBy('title', $arrayUrl[0])){
 			$config[] = array('/^('.$section[0]['title'].')(.*)/iu','index/section/$1$2');
 		}
 		
+		//echo '1'; exit(); 
 		$pattern = array();
 		$replacement = array();
 		foreach ($config as $regexpArr){
@@ -32,9 +30,7 @@ class Router {
 		}
 		
 		$url = preg_replace($pattern, $replacement, $inputUrl);
-		
-		
-		
+
 		$arrayUrl =(explode('/',$url));
  		
 		if (isset($arrayUrl[0]) AND $arrayUrl[0]) {
@@ -67,9 +63,9 @@ class Router {
 			$pattern[]=$regexpArr[0];
 			$replacement[]=$regexpArr[1];
 		}
-		
+
 		$shortUrl = preg_replace($pattern, $replacement, $urlLong);
-		
+
 		return $shortUrl;
 	}
 	

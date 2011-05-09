@@ -1,7 +1,7 @@
 <?php
 $config=array();
 
-$config['showErrors']=true;
+$config['showErrors']=false;
 
 $config['debugger']=array(
 	'enabled'=>false
@@ -13,7 +13,12 @@ $config['googleAnalytics']=array(
 
 $config['db']=array(
 	'host' => 'localhost',
-	'username' => 'root', //brusnich_anna
-	'pass' =>'', //neNSxDw5
-	'db'=>'anna' //brusnich_anna
+	'username' => 'root',
+	'pass' =>'',
+	'db'=>'anna'
 );
+
+//	'username' => 'brusnich_anna',
+//	'pass' =>'neNSxDw5',
+//	'db'=>'brusnich_anna'
+	

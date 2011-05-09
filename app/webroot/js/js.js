@@ -20,18 +20,21 @@ function centredOverlayBlock(width, height){
 $(document).ready(function() {
 	 var ua = navigator.userAgent.toLowerCase();
 	 if (ua.indexOf("msie") != -1 && ua.indexOf("opera") == -1 && ua.indexOf("webtv") == -1) {
-		 var historyOptions = {};
+		 var historyOptions = {};		 
 	 }else{
+		 // for FF Chrome we would no escape  / % 
 		 var historyOptions = { unescape: "/,%" }; 
 	 }
-	
+	 
 	 $.history.init(loadContent, historyOptions);
 	 	 
 	 $('.item a').click(function() {
  		$('.overlayBlock').width(300);
  		$('.overlayBlock').height(250);
- 		centredOverlayBlock(); 		
-		$.history.load($(this).attr('href'));
+ 		centredOverlayBlock(); 	
+ 		
+ 		var href = $(this).attr('href');
+		$.history.load(href);
 		return false;
 	 });
 
@@ -62,8 +65,21 @@ $(document).ready(function() {
 function loadContent(hash) {
 	if(hash != "") {		
 		show_overlay(0.7);		
-		$('.overlayBlock').fadeIn();			
-        $('.overlayBlock').load(hash, function(){
+		$('.overlayBlock').fadeIn();
+		
+		var href = hash;
+		
+ 		if (navigator.userAgent.toLowerCase().indexOf("msie") != -1) {
+// 			href = href.replace(/%/g,'%25');
+// 			href = href.replace(/\//g,'%2F');
+	 		
+	 		
+ 			//href = href.replace(/%2F/g,'/').replace(/\//g,'%2F');
+	 		//href = href.replace(/%25/g,'%').replace(/%/g,'%25').replace(/%252F/g,'%2F');	 		
+ 		}
+		
+ 		alert(href);
+        $('.overlayBlock').load(href, function(){
         	"_gaq" in window && _gaq.push(['_trackPageview', hash]);
         });
     }else{    	

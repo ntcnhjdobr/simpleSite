@@ -38,7 +38,7 @@ class Core
 		}
 
 		self::_renderErrorPage();
-		return true;
+		exit();
 	}
 	/**
 	 * 

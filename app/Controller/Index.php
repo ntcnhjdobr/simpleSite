@@ -171,7 +171,6 @@ class Controller_Index extends AbstractController
 			header('Location: '.Helper_Html::link(array('controller'=>'index','action'=>'section','param1'=>$sectionCurr['title'],'#'=>'/'.$projectC.'/'.$sample_id)));	
 		}
 		
-		
 		$samplesCountMod = $this->_getSamplesCount($sectionCurr['section_id']);
 		
 		foreach ($projects as $projectKey => $project){

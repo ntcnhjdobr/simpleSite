@@ -33,9 +33,12 @@ class Autoloader {
         		break;	
         	}
         }
-	
+
 		if (!class_exists($class)) {
-			throw new AbstractException('Class '.$class.' not found');
+			
+			Logger::write('error', $class);
+			
+			trigger_error('Class '.$class.' not found');
 		};
 		
 		return;

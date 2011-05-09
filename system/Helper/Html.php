@@ -34,9 +34,9 @@ class Helper_Html {
 		if (isset($params['query'])) {
 			$link.='?'.$params['query'];
 		}
-		
-		if (isset($params['#'])) {	
-			
+
+		if (isset($params['#'])) {
+		//	$link.='#'.self::_getSegment($params['#']);
 			$link.='#'.str_replace('%2F', '/', self::_getSegment($params['#']));
 		}
 		
